@@ -4,11 +4,9 @@ def validate_passport(passport):
     return all(key in passport for key in ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"])
 
 def parse_passport(passport):
-    raw_passport = re.split(' |\n', passport)
-
     # Convert passport to dict
     passport_dict = dict()
-    for item in raw_passport:
+    for item in re.split(' |\n', passport):
         passport_dict[item.split(':')[0]] = item.split(':')[1]
     
     # Validate specific elements
