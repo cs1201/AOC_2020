@@ -12,20 +12,16 @@ def traverse_map(data, rule):
     route_map = parse_map(data)
     y_len = len(route_map)
     x_len = len(route_map[0])
-    x = 0
-    y = 0
-    tree_sum = 0
+    x,y,tree_sum = 0,0,0
 
     while True:
-        # Traverse 3 right, 1 down
+        # Traverse x right, y down
         x += rule[0]
         y += rule[1]
-        # Wrap around if past right of map
-        if x > x_len-1:
-            x -= x_len
-        # If still in y bounds, check cell at 3r,1d to see if there's a tree
-        if (x < x_len and y < y_len):
-            if route_map[y][x]:
+
+        # If still in y bounds, check cell at route x across, y down to see if there's a tree
+        if y < y_len:
+            if route_map[y][x % x_len]:
                 tree_sum += 1
         else:
             break
@@ -45,3 +41,5 @@ with open("data/day_3.txt") as f:
     data = [(x.strip()) for x in f.readlines()]
     print(f"Part One: {part_one(data)}")
     print(f"Part Two: {part_two(data)}")
+    assert part_one(data) == 299
+    assert part_two(data) == 3621285278
