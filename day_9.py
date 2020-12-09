@@ -1,20 +1,13 @@
 PREAMBLE_SIZE = 25
 
 def check_valid(seq):
-    val = seq[-1]
-    preamble = seq[:-1]
-    for a in preamble:
-        for b in preamble:
-            if a != b and a+b == val:
-                return True
-    return False
+    return any((a!=b and a+b==seq[-1]) for a in seq[:-1] for b in seq[:-1])
 
 def part_one(data):
     for i, val in enumerate(data):
         if i > PREAMBLE_SIZE:
             if not check_valid(data[i-PREAMBLE_SIZE-1:i]):
                 return data[i-1]
-
 
 def part_two(data):
     invalid_val = part_one(data)
