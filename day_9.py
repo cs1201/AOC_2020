@@ -12,13 +12,13 @@ def part_one(data):
 def part_two(data):
     invalid_val = part_one(data)
     for i, val_a in enumerate(data):
-        running = []
+        window = []
         j = 1
-        running.append(val_a)
-        while sum(running) <= invalid_val:
-            running.append(data[i+j])
-            if sum(running) == invalid_val:
-                return max(running) + min(running)
+        window.append(val_a)
+        while sum(window) <= invalid_val:
+            window.append(data[i+j])
+            if sum(window) == invalid_val:
+                return max(window) + min(window)
             j+=1
 
 with open("data/day_9.txt") as f:
