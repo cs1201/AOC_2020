@@ -1,11 +1,8 @@
 
-def part_one(data):
-    available = sorted(data.copy())
-    available.append(max(available)+3)
-    available.insert(0, 0)
+def part_one(adaptors):
     diffs = []
-    for i in range(len(available)-1):
-        diffs.append(available[i+1] - available[i])
+    for i in range(len(adaptors)-1):
+        diffs.append(adaptors[i+1] - adaptors[i])
     return diffs.count(1) * diffs.count(3)
 
 def search_valid_chains(adaptors, valid_paths, i):
@@ -20,16 +17,14 @@ def search_valid_chains(adaptors, valid_paths, i):
     valid_paths[i] = num
     return num
 
-def part_two(data):
+def part_two(adaptors):
     valid_paths = {}
-    adaptors = []
-    adaptors.append(0)
-    adaptors.extend(sorted(data))
-    adaptors.append(max(adaptors)+3)
     return search_valid_chains(adaptors, valid_paths, 0)
         
 
 with open("data/day_10.txt") as f:
     data = [int(x.strip()) for x in f.readlines()]
-    print(f"Part One: {part_one(data)}") #2812
-    print(f"Part Two: {part_two(data)}") #386869246296064
+    data.extend([0, max(data)+3])
+    adaptors = sorted(data)
+    print(f"Part One: {part_one(adaptors)}") #2812
+    print(f"Part Two: {part_two(adaptors)}") #386869246296064
